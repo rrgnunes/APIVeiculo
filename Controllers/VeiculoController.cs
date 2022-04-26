@@ -32,6 +32,56 @@ namespace Backend.Controllers
             return lstVeiculo;
         }
 
+        [HttpGet("placa/{placa}")]
+        public ActionResult<List<Veiculo>> Getplaca(string placa)
+        {
+            List<Veiculo> lstVeiculo = _veiculoContext.Veiculos.Where(p => p.Placa == placa).ToList();
+            return lstVeiculo;
+        }
+
+        [HttpGet("placa/{placa}/pagina/{pagina}")]
+        public ActionResult<List<Veiculo>> Getplacas(int? pagina, string placa)
+        {
+            const int paginaQtd = 1;
+            List<Veiculo> lstVeiculo = _veiculoContext.Veiculos.Where(p => p.Placa == placa).Skip((pagina ?? 0) * paginaQtd)
+                                          .Take(paginaQtd)
+                                          .ToList();
+            return lstVeiculo;
+        }
+
+        [HttpGet("modelo/{modelo}")]
+        public ActionResult<List<Veiculo>> Getmodelo(string modelo)
+        {
+            List<Veiculo> lstVeiculo = _veiculoContext.Veiculos.Where(p => p.Modelo == modelo).ToList();
+            return lstVeiculo;
+        }
+
+        [HttpGet("modelo/{modelo}/pagina/{pagina}")]
+        public ActionResult<List<Veiculo>> Getmodelos(int? pagina, string modelo)
+        {
+            const int paginaQtd = 1;
+            List<Veiculo> lstVeiculo = _veiculoContext.Veiculos.Where(p => p.Modelo == modelo).Skip((pagina ?? 0) * paginaQtd)
+                                          .Take(paginaQtd)
+                                          .ToList();
+            return lstVeiculo;
+        }
+
+        [HttpGet("qtdmodelo/{modelo}")]
+        public ActionResult<Quantidade> GetQtdModelo(string modelo)
+        {
+            Quantidade oQtd = new Quantidade();
+            oQtd.qtdRetorno = _veiculoContext.Veiculos.Where(p => p.Modelo == modelo).ToList().Count;
+            return oQtd;
+        }
+
+        [HttpGet("qtdcor/{cor}")]
+        public ActionResult<Quantidade> GetQtdCr(string cor)
+        {
+            Quantidade oQtd = new Quantidade();
+            oQtd.qtdRetorno = _veiculoContext.Veiculos.Where(p => p.Cor == cor).ToList().Count;
+            return oQtd;
+        }
+
         [HttpGet("{id}")]
         public ActionResult<Veiculo> GetstringById(int id)
         {

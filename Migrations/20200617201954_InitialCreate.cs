@@ -16,7 +16,7 @@ namespace Backend.Migrations
                     Cor = table.Column<string>(nullable: true),
                     Fabricante = table.Column<string>(nullable: true),
                     Modelo = table.Column<string>(nullable: true),
-                    AnoFab = table.Column<System.DateTime>(nullable: true)
+                    AnoFab = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
